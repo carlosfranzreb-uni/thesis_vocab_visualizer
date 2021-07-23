@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <center>
+      <h1>Vocab Visualizer</h1>
+      <textarea id="title" disabled>{{ title }}</textarea>
+      <textarea id="abstract" disabled>{{ abstract }}</textarea>
+      <form method="POST" enctype="multipart/form-data">
+        {{ form.doi }} {{ form.submit }}
+      </form>
+    </center>
+  </body>
+</html>
