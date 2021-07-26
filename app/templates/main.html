@@ -1,15 +1,28 @@
 <html>
   <head>
-    <title></title>
+    <title>Vocab Visualizer</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
   </head>
-  <body>
+  <body onload="auto_grow(document.getElementById('abstract'))">
     <center>
       <h1>Vocab Visualizer</h1>
-      <textarea id="title" disabled>{{ title }}</textarea>
-      <textarea id="abstract" disabled>{{ abstract }}</textarea>
+      <input id="title" placeholder="Title" disabled value="{{ title }}" />
+      <br />
+      <textarea
+        id="abstract"
+        placeholder="Abstract"
+        onchange="auto_grow(this)"
+        disabled
+      >
+        {{ abstract }}
+      </textarea>
       <form method="POST" enctype="multipart/form-data">
-        {{ form.doi }} {{ form.submit }}
+        {{ form.id(placeholder="Identifier") }} {{ form.submit }}
       </form>
     </center>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
