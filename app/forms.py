@@ -3,5 +3,5 @@ from wtforms import SubmitField, StringField
 
 
 class MainForm(FlaskForm):
-    doi = StringField()
+    id = StringField()
     submit = SubmitField('Submit')

@@ -1,8 +1,12 @@
-def parse_tasks(text):
-  """ Convert string with tasks into input for tasks. """
-  return text
+from xml.etree import ElementTree as ET
+import json
+import os
 
 
-def parse_trucks(text):
-  """ Convert string with trucks into input for trucks. """
-  return text
+def get_doc(id):
+  """ Return the title and abstract of the doc with the given DOI. """
+  data = json.load(open(f'app/static/data/json/dim/all/relevant_data.json'))
+  if id not in data:
+    return 'Document not part of this work.'
+  return data[id].values()
+  
