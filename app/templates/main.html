@@ -9,16 +9,9 @@
   <body onload="auto_grow(document.getElementById('abstract'))">
     <center>
       <h1>Vocab Visualizer</h1>
-      <input id="title" placeholder="Title" disabled value="{{ title }}" />
+      <input id="title" placeholder="Title" value="{{ title }}" disabled />
       <br />
-      <textarea
-        id="abstract"
-        placeholder="Abstract"
-        onchange="auto_grow(this)"
-        disabled
-      >
-        {{ abstract }}
-      </textarea>
+      <textarea id="abstract" placeholder="Abstract" onchange="auto_grow(this)" disabled>{{ abstract }}</textarea>
       <form method="POST" enctype="multipart/form-data">
         {{ form.id(placeholder="Identifier") }} {{ form.submit }}
       </form>
