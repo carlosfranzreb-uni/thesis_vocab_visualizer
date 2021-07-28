@@ -10,4 +10,5 @@ div {
 mark {
   background-color: green;
   color: white;
+  padding: 0.1em;
 }
