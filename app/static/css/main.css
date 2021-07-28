@@ -1,9 +1,13 @@
-#title {
+div {
   width: 70%;
   margin-bottom: 1em;
+  border: 1px solid grey;
+  border-radius: 3px;
+  text-align: left;
+  padding: 0.5em;
 }
 
-#abstract {
-  width: 70%;
-  margin-bottom: 2em;
+mark {
+  background-color: green;
+  color: white;
 }
