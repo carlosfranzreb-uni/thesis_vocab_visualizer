@@ -9,7 +9,7 @@ from app.forms import MainForm
 @app.route("/", methods=['GET','POST'])
 def home():
     form = MainForm()
-    title, abstract = '', ''
+    title_marked, abstract_marked = 'Title', 'Abstract'
     if form.is_submitted():
       title, abstract = utils.get_doc(form.id.data)
       vocab = json.load(open('app/static/data/vocab/repo_vocab.json'))
