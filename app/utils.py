@@ -66,7 +66,10 @@ def format_text(text, indexes):
           res += word
           word_inserted = True
         res += '</mark> '
-        ngram = indexes.pop(0)
+        if len(indexes) > 0:
+          ngram = indexes.pop(0)
+        else:
+          ngram = None
       if not word_inserted:
         res += word + ' '
     else:
