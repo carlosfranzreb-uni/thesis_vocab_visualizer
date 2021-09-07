@@ -13,7 +13,7 @@
       <br />
       <div id="abstract" onchange="auto_grow(this)">{{ abstract|safe }}</div>
       <form method="POST" enctype="multipart/form-data">
-        {{ form.id(placeholder="Identifier") }} {{ form.submit }}
+        {{ form.id(placeholder="Identifier") }} {{ form.vocab }} {{ form.submit }}
       </form>
     </center>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

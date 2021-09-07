@@ -11,12 +11,7 @@ def home():
     form = MainForm()
     title_marked, abstract_marked = 'Title', 'Abstract'
     if form.is_submitted():
-      title, abstract = utils.get_doc(form.id.data)
-      vocab = json.load(open('app/static/data/vocab/repo_vocab.json'))
-      title_words = utils.get_vocab_words(title, vocab)
-      title_marked = utils.format_text(title_words)
-      abstract_words = utils.get_vocab_words(abstract, vocab)
-      abstract_marked = utils.format_text(abstract_words)
+    vocab = utils.get_vocab(form.vocab.data)
     return render_template(
       'main.html',
       title=title_marked,

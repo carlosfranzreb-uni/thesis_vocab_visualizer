@@ -3,6 +3,17 @@ import json
 import os
 
 
+def get_vocab(vocab_name):
+  if vocab_name == 'Unfiltered':
+    return json.load(open('app/static/data/vocab/repo_vocab.json'))
+  elif vocab_name == 'Step 1':
+    return json.load(open('app/static/data/vocab/repo_vocab_step_1.json'))
+  elif vocab_name == 'Step 2':
+    return json.load(open('app/static/data/vocab/repo_vocab_step_2.json'))
+  elif vocab_name == 'Step 4':
+    return json.load(open('app/static/data/vocab/repo_vocab_step_4.json'))
+
+
 def get_doc(id):
   """ Return the title and abstract of the doc with the given DOI. """
   data = json.load(open('app/static/data/json/dim/all/relevant_data.json'))
