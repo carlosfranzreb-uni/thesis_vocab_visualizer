@@ -54,7 +54,7 @@ def format_text(tokens, indexes):
   res = ""
   ngram = indexes.pop(0)
   for idx, token in enumerate(tokens):
-    if idx in ngram:
+    if ngram is not None and idx in ngram:
       token_inserted = False
       if ngram[0] == idx:
         res += f'<mark>{token} '
