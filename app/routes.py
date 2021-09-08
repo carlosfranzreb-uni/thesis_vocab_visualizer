@@ -13,10 +13,10 @@ def home():
   if form.is_submitted():
     doc = utils.get_doc(form.id.data)
     vocab = utils.get_vocab(form.vocab.data)
-    title_words = utils.get_vocab_words(doc['title']['processed'], vocab)
-    title_marked = utils.format_text(doc['title']['original'], title_words)
-    abstract_words = utils.get_vocab_words(doc['abstract']['processed'], vocab)
-    abstract_marked = utils.format_text(doc['abstract']['original'], abstract_words)
+    title_words = utils.get_vocab_words(doc['title']['lemmas'], vocab)
+    title_marked = utils.format_text(doc['title']['tokens'], title_words)
+    abstract_words = utils.get_vocab_words(doc['abstract']['lemmas'], vocab)
+    abstract_marked = utils.format_text(doc['abstract']['tokens'], abstract_words)
   return render_template(
     'main.html',
     title=title_marked,

@@ -1,6 +1,7 @@
-from xml.etree import ElementTree as ET
 import json
-import os
+
+from flair.data import Sentence
+from flair.tokenization import SpacyTokenizer
 
 
 def get_vocab(vocab_name):
@@ -16,29 +17,29 @@ def get_vocab(vocab_name):
 
 def get_doc(id):
   """ Return the title and abstract of the doc with the given DOI. """
-  data = json.load(open('app/static/data/json/dim/all/data_processed.json'))
-  original_data = json.load(open('app/static/data/json/dim/all/relevant_data.json'))
-  if id not in data:
+  lemmas = json.load(open('app/static/data/json/dim/all/data_lemmas.json'))
+  tokens = json.load(open('app/static/data/json/dim/all/data_tokens.json'))
+  if id not in lemmas:
     return 'Document not part of this work.'
   return {
     'title': {
-      'original': original_data[id]['title'], 'processed': data[id]['title']
+      'tokens': tokens[id]['title'], 'lemmas': lemmas[id]['title']
     },
     'abstract': {
-      'original': original_data[id]['abstract'], 'processed': data[id]['abstract']
+      'tokens': tokens[id]['abstract'], 'lemmas': lemmas[id]['abstract']
     }
   }
 
 
-def get_vocab_words(processed, vocab):
+def get_vocab_words(lemmas, vocab):
   """ Given a text, return a list of tuples where each tuple contains the 
   indexes of the words that compose that ngram, if it is present in the
   vocabulary. Check ngrams up to length 4. """
   res = []
   i = 0
-  while i < len(processed):
+  while i < len(lemmas):
     for j in range(i+4, i, -1):
-      ngram = ' '.join(processed[i:j])
+      ngram = ' '.join(lemmas[i:j])
       if ngram in vocab:
         res.append(range(i, j))
         i = j
@@ -48,32 +49,32 @@ def get_vocab_words(processed, vocab):
   return res
 
 
-def format_text(text, indexes):
+def format_text(tokens, indexes):
   """ Given a text and the indexes returned by get_vocab_words(), output a
   string that encloses each ngram present in 'indexes' with the <mark> tags. """
   if len(indexes) == 0:
-    return text
+    return ' '.join(tokens)
   res = ""
   ngram = indexes.pop(0)
-  for idx, word in enumerate(text.split(' ')):
+  for idx, token in enumerate(tokens):
     if idx in ngram:
-      word_inserted = False
+      token_inserted = False
       if ngram[0] == idx:
-        res += f'<mark>{word} '
-        word_inserted = True
+        res += f'<mark>{token} '
+        token_inserted = True
       if ngram[-1] == idx:
-        if not word_inserted:
-          res += word
-          word_inserted = True
+        if not token_inserted:
+          res += token
+          token_inserted = True
         res += '</mark> '
         if len(indexes) > 0:
           ngram = indexes.pop(0)
         else:
           ngram = None
-      if not word_inserted:
-        res += word + ' '
+      if not token_inserted:
+        res += token + ' '
     else:
-      res += word + ' '
+      res += token + ' '
   return res[:-1]
 
 
