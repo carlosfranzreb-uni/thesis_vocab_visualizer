@@ -1,8 +1,5 @@
 import json
 
-from flair.data import Sentence
-from flair.tokenization import SpacyTokenizer
-
 
 def get_vocab(vocab_name):
   if vocab_name == 'Unfiltered':
